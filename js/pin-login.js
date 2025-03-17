@@ -62,11 +62,17 @@ function handleClick(value) {
 
     // Check if all inputs are filled, then alert the PIN
     let pin = Array.from(inputs).map(input => input.value).join("");
-    if (pin.length === 4 && value === ">" && pin !== "1234") {
+    if (value === ">" && pin.length !== 4) {
         errorTrigger();
     }
-    else if (value === ">" && pin.length !== 4) {
-        errorTrigger();
+    else if (pin.length === 4){
+        const frm = document.getElementById("formContainer");
+        const pinContainer = document.createElement("input");
+        pinContainer.type = "hidden";
+        pinContainer.value = pin;
+        pinContainer.name = "pin";
+        frm.appendChild(pinContainer);
+
     }
 }
 
@@ -90,6 +96,7 @@ function errorTrigger() {
 
 // Generate buttons dynamically
 buttonValues.forEach((value) => {
+    
     const btnContainer = document.createElement("div");
     btnContainer.classList.add("btn-container");
 
@@ -100,6 +107,19 @@ buttonValues.forEach((value) => {
     button.addEventListener("click", () => handleClick(value));
 
     // Append button to its container
-    btnContainer.appendChild(button);
+    if (value ===">"){
+        const frmContainer = document.createElement("form");
+        frmContainer.id = "formContainer";
+        frmContainer.method = "post";
+        frmContainer.action = "";
+        button.type = "submit";
+        frmContainer.appendChild(button);
+        btnContainer.appendChild(frmContainer);
+    }
+    else {
+        btnContainer.appendChild(button);
+    }
     keysContainer.appendChild(btnContainer);
+
+
 });
