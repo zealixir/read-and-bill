@@ -96,3 +96,8 @@ body {
     color: #0a6ea8;
     text-align: center;
   }
+
+  .error {
+    color: red;
+    text-align: center;
+  }

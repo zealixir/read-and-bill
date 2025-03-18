@@ -65,12 +65,13 @@ function handleClick(value) {
     if (value === ">" && pin.length !== 4) {
         errorTrigger();
     }
-    else if (pin.length === 4){
+    else if (pin.length === 4 && !(pin.length > 5)){
         const frm = document.getElementById("formContainer");
         const pinContainer = document.createElement("input");
         pinContainer.type = "hidden";
         pinContainer.value = pin;
         pinContainer.name = "pin";
+        pinContainer.id = "pinCode";
         frm.appendChild(pinContainer);
 
     }
